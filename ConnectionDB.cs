@@ -18,6 +18,11 @@ namespace Fotolva
 
         private static readonly string connectionString = $"server={server};port={port};user={user};password={password};";
 
+        public ConnectionDB()
+        {
+            EnsureDatabaseExists();
+        }
+
         // the connection returns
         private MySqlConnection EstablishConnection()
         {
@@ -38,8 +43,6 @@ namespace Fotolva
         // the connection the DBFotolva returns
         public MySqlConnection EstablishConnectionToDB()
         {   
-            EnsureDatabaseExists();
-
             MySqlConnection conn = null;
 
             try

@@ -7,7 +7,6 @@ namespace Fotolva
         public Form1()
         {
             InitializeComponent();
-
         }
     }
 }
