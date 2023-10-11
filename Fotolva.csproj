@@ -127,10 +127,19 @@
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageManager.cs" />
+    <Compile Include="NewAlbum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewAlbum.Designer.cs">
+      <DependentUpon>NewAlbum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewAlbum.resx">
+      <DependentUpon>NewAlbum.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -158,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\disco.png" />
     <None Include="Resources\plaza-mas.png" />
     <None Include="Resources\icon.png" />
   </ItemGroup>
