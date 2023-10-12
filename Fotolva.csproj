@@ -133,6 +133,12 @@
     <Compile Include="NewAlbum.Designer.cs">
       <DependentUpon>NewAlbum.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewImages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewImages.Designer.cs">
+      <DependentUpon>NewImages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Home.resx">

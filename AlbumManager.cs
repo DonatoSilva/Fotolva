@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing.Text;
 using System.Windows.Forms;
 
 namespace Fotolva
@@ -17,20 +18,21 @@ namespace Fotolva
             TableVerification();
         }
 
-        public void CreateAlbum(string name, DateTime date, string place, string description)
-        {
+        public int CreateAlbum(string name, DateTime date, string place, string description)
+        {   
+            int id = 0;
             using (conn)
             {
                 try
                 {
                     conn.Open();
-                    string query = "INSERT INTO Albums (name, date, place, description) VALUES (@nombre, @date, @place, @description)";
+                    string query = "INSERT INTO Albums (name, date, place, description) VALUES (@nombre, @date, @place, @description) RETURNING id";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@nombre", name);
                     cmd.Parameters.AddWithValue("@date", date);
                     cmd.Parameters.AddWithValue("@place", place);
                     cmd.Parameters.AddWithValue("@description", description);
-                    cmd.ExecuteNonQuery();
+                    id = Convert.ToInt32(cmd.ExecuteNonQuery());
                 }
                 catch (Exception e)
                 {
@@ -41,6 +43,8 @@ namespace Fotolva
                     conn.Close(); 
                 }
             }
+
+            return id;
         }
 
         public DataTable GetAlbums()

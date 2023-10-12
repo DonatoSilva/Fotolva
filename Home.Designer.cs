@@ -42,7 +42,7 @@
             this.TitleHome.Location = new System.Drawing.Point(10, 10);
             this.TitleHome.Margin = new System.Windows.Forms.Padding(1);
             this.TitleHome.Name = "TitleHome";
-            this.TitleHome.Size = new System.Drawing.Size(88, 39);
+            this.TitleHome.Size = new System.Drawing.Size(117, 39);
             this.TitleHome.TabIndex = 0;
             this.TitleHome.Text = "Fotolva";
             this.TitleHome.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -50,7 +50,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Fotolva.Properties.Resources.icon;
-            this.pictureBox1.Location = new System.Drawing.Point(97, 10);
+            this.pictureBox1.Location = new System.Drawing.Point(120, 10);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(34, 39);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -70,9 +70,9 @@
             this.btnNewAlbum.ForeColor = System.Drawing.Color.White;
             this.btnNewAlbum.Image = global::Fotolva.Properties.Resources.plaza_mas;
             this.btnNewAlbum.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNewAlbum.Location = new System.Drawing.Point(370, 10);
+            this.btnNewAlbum.Location = new System.Drawing.Point(363, 10);
             this.btnNewAlbum.Name = "btnNewAlbum";
-            this.btnNewAlbum.Size = new System.Drawing.Size(100, 39);
+            this.btnNewAlbum.Size = new System.Drawing.Size(107, 39);
             this.btnNewAlbum.TabIndex = 3;
             this.btnNewAlbum.Text = "Nuevo";
             this.btnNewAlbum.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
