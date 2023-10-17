@@ -72,17 +72,18 @@
             // 
             this.txtNameAlbum.Location = new System.Drawing.Point(17, 172);
             this.txtNameAlbum.Name = "txtNameAlbum";
-            this.txtNameAlbum.Size = new System.Drawing.Size(435, 34);
+            this.txtNameAlbum.Size = new System.Drawing.Size(435, 29);
             this.txtNameAlbum.TabIndex = 8;
             this.txtNameAlbum.TextChanged += new System.EventHandler(this.TxtNameAlbum_TextChanged);
             // 
             // lblNameAlbum
             // 
             this.lblNameAlbum.AutoSize = true;
+            this.lblNameAlbum.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblNameAlbum.Location = new System.Drawing.Point(12, 139);
             this.lblNameAlbum.Margin = new System.Windows.Forms.Padding(3);
             this.lblNameAlbum.Name = "lblNameAlbum";
-            this.lblNameAlbum.Size = new System.Drawing.Size(89, 27);
+            this.lblNameAlbum.Size = new System.Drawing.Size(71, 21);
             this.lblNameAlbum.TabIndex = 7;
             this.lblNameAlbum.Text = "Nombre:";
             this.lblNameAlbum.Click += new System.EventHandler(this.LblNameAlbum_Click);
@@ -91,16 +92,17 @@
             // 
             this.txtPlaceAlbum.Location = new System.Drawing.Point(17, 245);
             this.txtPlaceAlbum.Name = "txtPlaceAlbum";
-            this.txtPlaceAlbum.Size = new System.Drawing.Size(212, 34);
+            this.txtPlaceAlbum.Size = new System.Drawing.Size(212, 29);
             this.txtPlaceAlbum.TabIndex = 10;
             // 
             // lblPlaceAlbum
             // 
             this.lblPlaceAlbum.AutoSize = true;
+            this.lblPlaceAlbum.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblPlaceAlbum.Location = new System.Drawing.Point(12, 212);
             this.lblPlaceAlbum.Margin = new System.Windows.Forms.Padding(3);
             this.lblPlaceAlbum.Name = "lblPlaceAlbum";
-            this.lblPlaceAlbum.Size = new System.Drawing.Size(65, 27);
+            this.lblPlaceAlbum.Size = new System.Drawing.Size(53, 21);
             this.lblPlaceAlbum.TabIndex = 9;
             this.lblPlaceAlbum.Text = "Lugar:";
             this.lblPlaceAlbum.Click += new System.EventHandler(this.LblPlaceAlbum_Click);
@@ -123,17 +125,18 @@
             this.dateTimeAlbum.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimeAlbum.Location = new System.Drawing.Point(240, 245);
             this.dateTimeAlbum.Name = "dateTimeAlbum";
-            this.dateTimeAlbum.Size = new System.Drawing.Size(212, 34);
+            this.dateTimeAlbum.Size = new System.Drawing.Size(212, 29);
             this.dateTimeAlbum.TabIndex = 12;
             this.dateTimeAlbum.Value = new System.DateTime(2023, 10, 11, 20, 17, 40, 0);
             // 
             // lblDateAlbum
             // 
             this.lblDateAlbum.AutoSize = true;
+            this.lblDateAlbum.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblDateAlbum.Location = new System.Drawing.Point(235, 212);
             this.lblDateAlbum.Margin = new System.Windows.Forms.Padding(3);
             this.lblDateAlbum.Name = "lblDateAlbum";
-            this.lblDateAlbum.Size = new System.Drawing.Size(66, 27);
+            this.lblDateAlbum.Size = new System.Drawing.Size(53, 21);
             this.lblDateAlbum.TabIndex = 13;
             this.lblDateAlbum.Text = "Fecha:";
             this.lblDateAlbum.Click += new System.EventHandler(this.LblDateAlbum_Click);
@@ -149,10 +152,11 @@
             // lblDescrptionAlbum
             // 
             this.lblDescrptionAlbum.AutoSize = true;
+            this.lblDescrptionAlbum.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblDescrptionAlbum.Location = new System.Drawing.Point(12, 285);
             this.lblDescrptionAlbum.Margin = new System.Windows.Forms.Padding(3);
             this.lblDescrptionAlbum.Name = "lblDescrptionAlbum";
-            this.lblDescrptionAlbum.Size = new System.Drawing.Size(118, 27);
+            this.lblDescrptionAlbum.Size = new System.Drawing.Size(94, 21);
             this.lblDescrptionAlbum.TabIndex = 15;
             this.lblDescrptionAlbum.Text = "Descripción:";
             this.lblDescrptionAlbum.Click += new System.EventHandler(this.LblDescrptionAlbum_Click);

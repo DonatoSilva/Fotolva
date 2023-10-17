@@ -20,19 +20,19 @@ namespace Fotolva
 
         public int CreateAlbum(string name, DateTime date, string place, string description)
         {   
-            int id = 0;
+            int id = -1;
             using (conn)
             {
                 try
                 {
                     conn.Open();
-                    string query = "INSERT INTO Albums (name, date, place, description) VALUES (@nombre, @date, @place, @description) RETURNING id";
+                    string query = "INSERT INTO Albums (name, date, place, description) VALUES (@nombre, @date, @place, @description);  SELECT LAST_INSERT_ID();";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@nombre", name);
                     cmd.Parameters.AddWithValue("@date", date);
                     cmd.Parameters.AddWithValue("@place", place);
                     cmd.Parameters.AddWithValue("@description", description);
-                    id = Convert.ToInt32(cmd.ExecuteNonQuery());
+                    id = Convert.ToInt32(cmd.ExecuteScalar());
                 }
                 catch (Exception e)
                 {

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Fotolva
@@ -24,10 +17,30 @@ namespace Fotolva
             string description = txtDescriptionAlbum.Text.Trim();
             DateTime dateTime = dateTimeAlbum.Value;
 
+            //It is verified that no field is empty
             if (name != "" && place != "" && description != "")
-            {
-                
-            } else
+            {   
+                //Create new Album in db
+                AlbumManager albumManager = new AlbumManager();
+                try
+                {
+                    int newAlbumID = albumManager.CreateAlbum(name, dateTime, place, description);
+
+                    // Check if newAlbumID has value
+                    if (newAlbumID != -1)
+                    {
+                        // open newImages
+                        NewImages newImages = new NewImages(newAlbumID);
+                        newImages.Show();
+                        this.Close();
+                    }
+                } 
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error, algo salido mal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else // If this empty message is displayed to user
             {
                 string messageFormEmpty = name == "" ? "El nombre" : place == "" ? "El lugar" : description == "" ? "La descripción" : "";
 

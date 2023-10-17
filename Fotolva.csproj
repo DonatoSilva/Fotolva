@@ -147,6 +147,9 @@
     <EmbeddedResource Include="NewAlbum.resx">
       <DependentUpon>NewAlbum.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewImages.resx">
+      <DependentUpon>NewImages.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

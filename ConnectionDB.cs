@@ -10,7 +10,7 @@ namespace Fotolva
         // The data for the connection is defined
         private static readonly string server = "localhost";
         private static readonly string port = "3306";
-        private static readonly string user = "ro0t";
+        private static readonly string user = "root";
         private static readonly string password = "";
 
         // The data for the db is defined
@@ -47,7 +47,7 @@ namespace Fotolva
 
             try
             {
-                string deConnectionString = $"{connectionString}detabase={nameDB};";
+                string deConnectionString = $"{connectionString}database={nameDB};";
                 conn = new MySqlConnection(deConnectionString);
             }
             catch (Exception e)
