@@ -50,7 +50,7 @@ namespace Fotolva
                 try
                 {
                     conn.Open();
-                    string query = "SELECT id, name, description, albumId FROM Images WHERE albumId = @albumId";
+                    string query = "SELECT id, name, description, dataImage, albumId FROM Images WHERE albumId = @albumId";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@albumId", albumId);
 
@@ -62,6 +62,7 @@ namespace Fotolva
                             image["id"] = reader.GetInt32("id");
                             image["name"] = reader.GetString("name");
                             image["description"] = reader.GetString("description");
+                            image["dataImage"] = (byte[])reader["dataImage"];
                             image["albumId"] = reader.GetInt32("albumId");
                             images.Add(image);
                         }
@@ -89,7 +90,7 @@ namespace Fotolva
                 try
                 {
                     conn.Open();
-                    string query = "SELECT id, name, description, albumId FROM Images WHERE id = @imageId";
+                    string query = "SELECT id, name, description, dataImage, albumId FROM Images WHERE id = @imageId";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@imageId", imageId);
 
@@ -101,6 +102,7 @@ namespace Fotolva
                             imageData["id"] = reader.GetInt32("id");
                             imageData["name"] = reader.GetString("name");
                             imageData["description"] = reader.GetString("description");
+                            imageData["dataImage"] = reader.GetByte("dataImage");
                             imageData["albumId"] = reader.GetInt32("albumId");
                         }
                     }

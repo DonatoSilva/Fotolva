@@ -109,17 +109,23 @@ namespace Fotolva
             {
                 ImageManager imageManager = new ImageManager();
 
-                foreach (var image in hasListImages)
+                try
                 {
-                    imageManager.CreateImage(image.Name, image.Description, image.BytesImage, this.newALbumID);
-                }
+                    foreach (var image in hasListImages)
+                    {
+                        imageManager.CreateImage(image.Name, image.Description, image.BytesImage, this.newALbumID);
+                    }
 
-                MessageBox.Show("Sean guadado" +
-                    " las imagenes correctamente al album", "Excelente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                
-                Home home = Application.OpenForms["Home"] as Home;
-                home.BringToFront();
-                this.Close();
+                    MessageBox.Show("Sean guadado las imagenes correctamente al album", "Excelente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    Home home = Application.OpenForms["Home"] as Home;
+                    home.BringToFront();
+                    home.SetViewListAlbums();
+                    this.Close();
+                } catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             } else
             {
                 MessageBox.Show("Para guargar debes de agregar al menos una imagen", "¡Espera...!", MessageBoxButtons.OK, MessageBoxIcon.Warning);

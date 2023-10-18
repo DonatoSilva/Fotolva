@@ -32,6 +32,9 @@
             this.TitleHome = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnNewAlbum = new Fotolva.Custom.ReundedButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tlpAlbums = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,12 +83,43 @@
             this.btnNewAlbum.UseVisualStyleBackColor = false;
             this.btnNewAlbum.Click += new System.EventHandler(this.BtnNewAlbum_Click);
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI Variable Text", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(15, 55);
+            this.label1.Margin = new System.Windows.Forms.Padding(3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(457, 32);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Álbumes";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tlpAlbums
+            // 
+            this.tlpAlbums.AutoScroll = true;
+            this.tlpAlbums.Location = new System.Drawing.Point(14, 106);
+            this.tlpAlbums.Name = "tlpAlbums";
+            this.tlpAlbums.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tlpAlbums.Size = new System.Drawing.Size(455, 515);
+            this.tlpAlbums.TabIndex = 5;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Location = new System.Drawing.Point(15, 92);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(455, 1);
+            this.panel1.TabIndex = 15;
+            // 
             // Home
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(41)))), ((int)(((byte)(72)))));
             this.ClientSize = new System.Drawing.Size(484, 661);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tlpAlbums);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnNewAlbum);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.TitleHome);
@@ -108,6 +142,9 @@
         private System.Windows.Forms.Label TitleHome;
         private System.Windows.Forms.PictureBox pictureBox1;
         private Custom.ReundedButton btnNewAlbum;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.FlowLayoutPanel tlpAlbums;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
