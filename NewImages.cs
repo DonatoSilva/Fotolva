@@ -17,17 +17,43 @@ namespace Fotolva
         private class SelectedImagenes
         {
             public string Name { get; set; }
+            public int ID { get; set; }
             public byte[] BytesImage { get; set; }
             public string Description { get; set; }
         }
+
+        public NewImages()
+        { }
 
         public NewImages(int isNewAlbumId)
         {
             InitializeComponent();
             newALbumID = isNewAlbumId;
 
-            TitleWindows(); //I update the window title 
+            TitleWindows(); //I update the window title
             ConfigureDataGridView();
+            GetDataImages(newALbumID);
+        }
+
+        private void GetDataImages(int newALbumID)
+        {   
+            ImageManager imageManager = new ImageManager();
+            List<Dictionary<string, object>> images = imageManager.ReadImages(newALbumID);
+
+            foreach (var image in images)
+            {
+                SelectedImagenes selectedImagenes = new SelectedImagenes
+                {   
+                    ID = (int)image["id"],
+                    Name = image["name"].ToString(),
+                    Description = image["description"].ToString(),
+                    BytesImage = (byte[])image["dataImage"]
+                };
+
+                hasListImages.Add(selectedImagenes);
+            }
+
+            ViewlistImagesAlbum();
         }
 
         private void TitleWindows()
@@ -216,16 +242,11 @@ namespace Fotolva
 
         }
 
-        private Image ResizeImage(Image image, int maxWidth, int maxHeight)
+        public Image ResizeImage(Image image, int maxWidth, int maxHeight)
         {
-            if (image.Width <= maxWidth && image.Height <= maxHeight)
-            {
-                // La imagen ya es lo suficientemente pequeña
-                return image;
-            }
-
             int newWidth, newHeight;
-            if (image.Width > image.Height)
+
+            if (image.Width * maxHeight > image.Height * maxWidth)
             {
                 newWidth = maxWidth;
                 newHeight = (int)(image.Height * ((float)newWidth / image.Width));

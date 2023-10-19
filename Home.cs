@@ -121,7 +121,7 @@ namespace Fotolva
                 btnViewAlbum.BorderRadius = 0;
                 btnViewAlbum.Click += (sender, e) =>
                 {
-                    ViewAlbum(Convert.ToInt32(row["id"]));
+                    ViewAlbum(Convert.ToInt32(row["id"]), row["name"].ToString());
                 };
 
                 ReundedButton btnDeleteAlbum = new ReundedButton();
@@ -156,8 +156,8 @@ namespace Fotolva
                     AlbumManager albumManager = new AlbumManager();
                     ImageManager imageManager = new ImageManager();
 
-                    albumManager.DeleteAlbum(id);
                     imageManager.DeleteImages(id);
+                    albumManager.DeleteAlbum(id);
                 } catch (Exception ex)
                 {
                     MessageBox.Show("Error al eliminar el álbum y sus respectivas imagenes: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -168,9 +168,9 @@ namespace Fotolva
             }
         }
 
-        private void ViewAlbum(int id)
+        private void ViewAlbum(int id, string nameAlbum)
         {
-            ViewAlbum viewAlbum = new ViewAlbum(id);
+            ViewAlbum viewAlbum = new ViewAlbum(id, nameAlbum);
             viewAlbum.Show();
         }
     }
