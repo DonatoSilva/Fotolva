@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,7 +13,8 @@ namespace Fotolva
 {
     public partial class Home : Form
     {
-        private DataTable albumsDataTable;
+        private DataTable albumsDataTable = new DataTable();
+        private string txtOldSearh = "";
         public Home()
         {
             InitializeComponent();
@@ -44,10 +46,8 @@ namespace Fotolva
 
         private void GetAlbums()
         {
-            if (albumsDataTable != null)
-            {
-                albumsDataTable.Clear();
-            }
+            
+            albumsDataTable.Clear();
 
             if (tlpAlbums.Controls.Count > 0)
             {
@@ -65,9 +65,39 @@ namespace Fotolva
             }
         }
 
-        public void SetViewListAlbums()
-        {   //get the list the album
-            GetAlbums();
+        private void GetDataSearch(string search)
+        {
+            albumsDataTable.Clear();
+
+            if (tlpAlbums.Controls.Count > 0)
+            {
+                tlpAlbums.Controls.Clear();
+            }
+
+            AlbumManager albumManager = new AlbumManager();
+
+            try
+            {
+                albumsDataTable = albumManager.SearchAlbum(search);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void SetViewListAlbums(string letterSearch = "")
+        {   
+            if (letterSearch != "")
+            {   
+                //get the list the search album
+                GetDataSearch(letterSearch);
+            } else
+            {
+                //get the list the album
+                GetAlbums();
+            }
+
             // Configura tu FlowLayoutPanel para tener dos columnas y sin espaciado entre controles.
             tlpAlbums.FlowDirection = FlowDirection.LeftToRight; // Para dos columnas.
 
@@ -172,6 +202,61 @@ namespace Fotolva
         {
             ViewAlbum viewAlbum = new ViewAlbum(id, nameAlbum);
             viewAlbum.Show();
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            string textSearch = txtSearch.Text.Trim();
+            bool textForeColor = txtSearch.ForeColor != Color.Gray;
+
+            if (textSearch != "" && textForeColor)
+            {
+                if (txtOldSearh != textSearch)
+                {   
+                    txtOldSearh = textSearch;
+                    SetViewListAlbums(textSearch);
+                    btnSearch.Image = Properties.Resources.x;
+
+                    if (tlpAlbums.Controls.Count == 0)
+                    {
+                        MessageBox.Show("Parece que tu búsqueda no ha dado ningún resultado. Quizás quieras probar con términos más generales o revisar la ortografía de tu consulta", "Busqueda");
+                        DefaultHome();
+                    }
+                } else
+                {
+                    DefaultHome();
+                }
+
+                void DefaultHome()
+                {
+                    SetViewListAlbums();
+                    txtSearch.Text = "Buscar";
+                    txtSearch.ForeColor = Color.Gray;
+                    txtOldSearh = "";
+                    btnSearch.Image = Properties.Resources.lupa;
+                }
+            } else
+            {
+                MessageBox.Show("No se puede buscar texto vació", "¡Oye!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void TxtSearch_Enter(object sender, EventArgs e)
+        {
+            if (txtSearch.Text != txtOldSearh)
+            {
+                txtSearch.Text = "";
+                txtSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void TxtSearch_Leave(object sender, EventArgs e)
+        {
+            if (txtSearch.Text.Trim() == "" && txtOldSearh == "")
+            {
+                txtSearch.Text = "Buscar";
+                txtSearch.ForeColor = Color.Gray;
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Fotolva
     {
         private int newALbumID; //id of the album to which images are to be added
         private List<SelectedImagenes> hasListImages = new List<SelectedImagenes>(); //has ths list of images
+        private List<SelectedImagenes> hasListImagesDelet = new List<SelectedImagenes>();
         private byte[] byteImageSeled = null;//has byte of imagen in progress
         
         //represents the image
@@ -107,20 +108,28 @@ namespace Fotolva
 
             if (nameImage != "" && descriptionImage != "" && byteImageSeled != null)
             {
-                SelectedImagenes selectedImagenes = new SelectedImagenes
+                int countLetter = descriptionImage.Length; // var containing the magnitude of description characters
+
+                if (countLetter >= 25 && 100 >= countLetter)
                 {
-                    Name = nameImage,
-                    Description = descriptionImage,
-                    BytesImage = byteImageSeled
-                };
+                    SelectedImagenes selectedImagenes = new SelectedImagenes
+                    {
+                        Name = nameImage,
+                        Description = descriptionImage,
+                        BytesImage = byteImageSeled
+                    };
 
-                hasListImages.Add(selectedImagenes);
-                ViewlistImagesAlbum();
-                byteImageSeled = null;
+                    hasListImages.Add(selectedImagenes);
+                    ViewlistImagesAlbum();
+                    byteImageSeled = null;
 
-                //se limpian los textBox
-                txtDescrptionImage.Text = "";
-                txtNameImage.Text = "";
+                    //se limpian los textBox
+                    txtDescrptionImage.Text = "";
+                    txtNameImage.Text = "";
+                } else
+                {
+                    MessageBox.Show("La descripcion debe tener entre 25 a 100 caracteres", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             } else
             {
                 string messageEmty = nameImage == "" ? "El nombre de la imagen a agregar no puede ser estar vacio" : descriptionImage == "" ? "La imagen a agregar debe tener una descripción" : byteImageSeled == null ? "debe seleccionar una imagen a agregar" : "";
@@ -131,15 +140,17 @@ namespace Fotolva
 
         private void BtnCreateImages_Click(object sender, EventArgs e)
         {
+            ImageManager imageManager = new ImageManager();
             if (hasListImages.Any())
             {
-                ImageManager imageManager = new ImageManager();
-
                 try
                 {
                     foreach (var image in hasListImages)
                     {
-                        imageManager.CreateImage(image.Name, image.Description, image.BytesImage, this.newALbumID);
+                        if (image.ID == 0)
+                        {
+                            imageManager.CreateImage(image.Name, image.Description, image.BytesImage, this.newALbumID);
+                        }
                     }
 
                     MessageBox.Show("Sean guadado las imagenes correctamente al album", "Excelente", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -155,6 +166,21 @@ namespace Fotolva
             } else
             {
                 MessageBox.Show("Para guargar debes de agregar al menos una imagen", "¡Espera...!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (hasListImagesDelet.Any())
+            {
+                try
+                {
+                    foreach(var image in hasListImagesDelet)
+                    {
+                        imageManager.DeleteImage(image.ID);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error al eliminar las imagenes de la base de datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
         }
@@ -273,9 +299,13 @@ namespace Fotolva
             {
                 if (e.RowIndex >= 0 && e.ColumnIndex == imagesGridView.Columns["deleteColumn"].Index)
                 {
-                    // 4. Verifica si se hizo doble clic en una celda de la columna de eliminación
                     if (MessageBox.Show("¿Seguro que deseas eliminar esta imagen?", "Confirmación", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
+                        if (hasListImages[e.RowIndex].ID > 0)
+                        {
+                            hasListImagesDelet.Add(hasListImages[e.RowIndex]);
+                        }
+
                         imagesGridView.Rows.RemoveAt(e.RowIndex); // Elimina la fila del datagridview 
                         hasListImages.RemoveAt(e.RowIndex); // lo remueve del arreglo
                     }

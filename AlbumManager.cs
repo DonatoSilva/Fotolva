@@ -163,6 +163,34 @@ namespace Fotolva
             }
         }
 
+        public DataTable SearchAlbum(string sentence)
+        {
+            DataTable albumsDataTable = new DataTable();
+
+            using (conn)
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT id, name, date, place, description FROM Albums WHERE name LIKE @searchSentence";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@searchSentence", sentence + "%"); //Search by name fragment
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    adapter.Fill(albumsDataTable);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Error al buscar álbumes: " + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+
+            return albumsDataTable;
+        }
+
         private void TableVerification()
         {
             try

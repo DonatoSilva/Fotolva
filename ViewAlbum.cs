@@ -40,13 +40,16 @@ namespace Fotolva
             lblDateAlbum.Text = albumData["date"].ToString();
             lblDescriptionAlbum.Text = albumData["description"].ToString();
 
-            lblNameImage.Text = lblNameImage.Text == "..." ? imagesData[0]["name"].ToString() : lblNameImage.Text;
-            lblDescriptionImage.Text = lblDescriptionImage.Text == "..." ? imagesData[0]["description"].ToString() : lblDescriptionImage.Text;
-            byte[] databy = (byte[])imagesData[0]["dataImage"];
-            using (var stream = new MemoryStream(databy))
+            if (imagesData.Any())
             {
-                pImage.SizeMode = PictureBoxSizeMode.Zoom;
-                pImage.Image = Image.FromStream(stream);
+                lblNameImage.Text = lblNameImage.Text == "..." ? imagesData[0]["name"].ToString() : lblNameImage.Text;
+                lblDescriptionImage.Text = lblDescriptionImage.Text == "..." ? imagesData[0]["description"].ToString() : lblDescriptionImage.Text;
+                byte[] databy = (byte[])imagesData[0]["dataImage"];
+                using (var stream = new MemoryStream(databy))
+                {
+                    pImage.SizeMode = PictureBoxSizeMode.Zoom;
+                    pImage.Image = Image.FromStream(stream);
+                }
             }
         }
 

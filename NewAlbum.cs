@@ -56,39 +56,50 @@ namespace Fotolva
 
             //It is verified that no field is empty
             if (name != "" && place != "" && description != "")
-            {   
-                //Create new Album in db
-                AlbumManager albumManager = new AlbumManager();
-                try
+            {
+                int countString = description.Length; // var containing the magnitude of description characters
+
+                if (25 <= countString && countString <= 100)
                 {
-                    if (albumId != -1)
+                    //Create new Album in db
+                    AlbumManager albumManager = new AlbumManager();
+                    try
                     {
-                        if (name != albumName || place != albumPlace || description != albumDescription || dateTime != albumDate)
+                        if (albumId != -1)
                         {
-                            albumManager.UpdateAlbum(albumId, name, dateTime, place, description);
-                            MessageBox.Show($"Se actualizo el album {albumName}", "Excelente", MessageBoxButtons.OK);
-                        } 
+                            if (name != albumName || place != albumPlace || description != albumDescription || dateTime != albumDate)
+                            {
+                                albumManager.UpdateAlbum(albumId, name, dateTime, place, description);
+                                MessageBox.Show($"Se actualizo el album {albumName}", "Excelente", MessageBoxButtons.OK);
+                            }
 
-                        NewImages newImages = new NewImages(albumId);
-                        newImages.Show();
-                        this.Close();
-                    } else
-                    {
-                        int newAlbumID = albumManager.CreateAlbum(name, dateTime, place, description);
-
-                        // Check if newAlbumID has value
-                        if (newAlbumID != -1)
-                        {
-                            // open newImages
-                            NewImages newImages = new NewImages(newAlbumID);
+                            NewImages newImages = new NewImages(albumId);
                             newImages.Show();
+                            newImages.BringToFront();
                             this.Close();
                         }
+                        else
+                        {
+                            int newAlbumID = albumManager.CreateAlbum(name, dateTime, place, description);
+
+                            // Check if newAlbumID has value
+                            if (newAlbumID != -1)
+                            {
+                                // open newImages
+                                NewImages newImages = new NewImages(newAlbumID);
+                                newImages.Show();
+                                newImages.BringToFront();
+                                this.Close();
+                            }
+                        }
                     }
-                } 
-                catch (Exception ex)
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error, algo a salido mal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                } else
                 {
-                    MessageBox.Show($"Error, algo a salido mal: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("La descripcion debe terner entre 25 a 100 caracteres", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else // If this empty message is displayed to user
